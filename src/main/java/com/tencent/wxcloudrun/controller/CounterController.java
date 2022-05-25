@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.List;
 
@@ -65,7 +67,11 @@ public class CounterController {
     logger.info("form unionId:{}", request.getHeader("X-WX-FROM-UNIONID"));
     logger.info("env:{}", request.getHeader("X-WX-ENV"));
     logger.info("source:{}", request.getHeader("X-WX-SOURCE"));
-    return ApiResponse.ok();
+    Map<String, String> map = new HashMap<>();
+    map.put("openId", request.getHeader("X-WX-OPENID"));
+    map.put("appId", request.getHeader("X-WX-APPID"));
+    map.put("unionId", request.getHeader("X-WX-UNIONID"));
+    return ApiResponse.ok(map);
   }
 
 
