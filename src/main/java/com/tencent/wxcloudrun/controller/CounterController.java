@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
@@ -46,6 +47,25 @@ public class CounterController {
     }
 
     return ApiResponse.ok(count);
+  }
+
+  /**
+   * 获取当前用户
+   * @return API response json
+   */
+  @GetMapping(value = "/api/current")
+  ApiResponse current(HttpServletRequest request) {
+    logger.info("/api/current get request");
+    logger.info("request:{}", request);
+    logger.info("openId:{}", request.getHeader("X-WX-OPENID"));
+    logger.info("appId:{}", request.getHeader("X-WX-APPID"));
+    logger.info("unionId:{}", request.getHeader("X-WX-UNIONID"));
+    logger.info("form openId:{}", request.getHeader("X-WX-FROM-OPENID"));
+    logger.info("form appId:{}", request.getHeader("X-WX-FROM-APPID"));
+    logger.info("form unionId:{}", request.getHeader("X-WX-FROM-UNIONID"));
+    logger.info("env:{}", request.getHeader("X-WX-ENV"));
+    logger.info("source:{}", request.getHeader("X-WX-SOURCE"));
+    return ApiResponse.ok();
   }
 
 
